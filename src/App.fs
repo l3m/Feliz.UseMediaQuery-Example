@@ -23,14 +23,24 @@ let useMediaQueryExample = React.functionComponent(fun () ->
     ])
 
 let render = React.functionComponent(fun () ->
+    let width = React.useResponsive(defaultBreakpoints)
+    
     Html.div [
         prop.style [
+            let bgColor = 
+                match width with
+                | ScreenSize.Mobile -> color.white
+                | ScreenSize.MobileLandscape -> color.whiteSmoke
+                | ScreenSize.Tablet -> color.darkGray
+                | ScreenSize.Desktop -> color.gray
+                | ScreenSize.WideScreen -> color.red
+            
             style.padding 100
             style.display.flex
             style.flexDirection.column
             style.alignItems.center            
             style.justifyContent.center
-            style.backgroundColor.beige
+            style.backgroundColor bgColor
         ]
         prop.children [
             useResponsiveExample ()
